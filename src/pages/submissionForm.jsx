@@ -65,7 +65,6 @@ const SubmissionForm = () => {
         setIsError(false);
         setIsLoading(true);
 
-        // Validation checks
         if (specialCharacterRegex.test(fullName)) {
             setIsLoading(false);
             setIsError(true);
