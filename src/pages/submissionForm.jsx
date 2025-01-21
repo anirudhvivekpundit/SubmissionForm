@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { getCategory, postSubmission } from "../services/apiservice";
+import axios from "axios";
+import { baseUrl, categoryEndpoint } from "../services/constants";
 
 const SubmissionForm = () => {
     const [fullName, setFullName] = useState("");
@@ -47,9 +49,9 @@ const SubmissionForm = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const categories = await getCategory();
-                if (categories != null) {
-                    setCategoryList(categories);
+                const categories = await axios.get(baseUrl+categoryEndpoint);
+                if (categories.status === 200) {
+                    setCategoryList(categories.data);
                 }
             } catch (error) {
                 setIsError(true);
